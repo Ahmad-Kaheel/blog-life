@@ -1,0 +1,10 @@
+Python==3.9.5
+Django==3.2.9  
+django-cors-headers # For connection between frontend and backend 
+django-summernote # To write profissional notes 
+djangorestframework 
+pillow # To upload images 
+psycopg2 # For postgres issues
+psycopg2-binary # For postgres issues
+django-summernote # To customize the content 
+django-rest-framework == 4.0.0
