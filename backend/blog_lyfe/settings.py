@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     
     # Third party Apps:
     'rest_framework',
-    'corsheaders',
+    'corsheaders',# For API issues 
     'django_summernote',
     
     # Default Apps: 
@@ -51,9 +51,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # Third party MiddleWare:
-    'corsheaders.middleware.CorsMiddleware',
-    
     # Default middleware:
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,7 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # Third party MiddleWare:
+    'corsheaders.middleware.CorsMiddleware', #To allow access to the API "CORS"
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True # Allow access for all domains "CORS"
+
 
 ROOT_URLCONF = 'blog_lyfe.urls'
 

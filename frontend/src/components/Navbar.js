@@ -5,7 +5,7 @@ const Navbar = () => (
 <div>
 <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Mony For All </Link>
+        <Link className="navbar-brand" to="/">Around the world </Link>
         <button className="navbar-toggler"
         type="button"
         data-bs-toggle="collapse" 
@@ -18,7 +18,7 @@ const Navbar = () => (
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
             <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" exact to = "/">Home</NavLink>
+                <NavLink className="nav-link active" aria-current="page" exact to = '/'>home</NavLink>
             </li>
             <li className="nav-item">
                 <NavLink className="nav-link" exact to = '/blog'>Blog</NavLink>
@@ -27,6 +27,7 @@ const Navbar = () => (
         </div>
         </div>
     </nav>
+    
 </div>
 );
 
