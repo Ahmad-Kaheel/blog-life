@@ -5,7 +5,7 @@ from django.utils.text import slugify
 # Create your models here.
 
 class categories(models.TextChoices):
-    WORLD = 'world'
+    WORLD = 'worl'
     ENVIRONMENT = 'environment'
     TECHNOLOGY = 'technology'
 

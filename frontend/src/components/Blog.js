@@ -32,7 +32,7 @@ const Blog = () => {
         fetchBlogs();
     }, []);
 
-    // Capitalize the first letter 
+    // Capitalize the first letter of the word
     const capitalizeFirstLetter = (word) => {
         if (word) 
             return word.charAt(0).toUpperCase() + word.slice(1);
@@ -42,27 +42,33 @@ const Blog = () => {
     // Get all blogs 
     const getBlogs = () => {
         let list = [];
-        let result = [];
+        let result = [];                      
 
         blogs.map(blogPost => {
             return list.push(
                 <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div className="col p-4 d-flex flex-column position-static">
-                        <strong className="d-inline-block mb-2 text-primary">World</strong>
-                        <h3 className="mb-0">Featured post</h3>
-                        <div className="mb-1 text-muted">Nov 12</div>
-                        <p className="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                        <Link to={} className="stretched-link">Continue reading</Link>
+                        <strong className="d-inline-block mb-2 text-primary">{capitalizeFirstLetter(blogPost.category)}</strong>
+                        <h3 className="mb-0">{blogPost.title}</h3>
+                        <div className="mb-1 text-muted">{blogPost.month} {blogPost.day}</div>
+                        <p className="card-text mb-auto">{blogPost.excerpt}</p>
+                        <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link>
                     </div>
                     <div className="col-auto d-none d-lg-block"></div>
-                    <svg className="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <img src={blogPost.thumbnail} width="200" height="250" alt="Thumbnail"></img>
                 </div>
             );
         });
+        
         for (let i = 0 ; i < list.length ; i += 2)
         result.push(
             <div key={i} className='row mb-2'>
-                
+                <div className="col-md-6">
+                    {list[i]}
+                </div>
+                <div className="col-md-6">
+                    {list[i+1] ? list[i+1] : null}
+                </div>
             </div>
         )
         return result;
