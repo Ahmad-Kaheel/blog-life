@@ -167,3 +167,5 @@ REST_FRAMEWORK = {
         
     ]
 }
+
+DATE_INPUT_FORMATS = ['%d %b %Y'] # Changing date format into "25 Oct 2006"

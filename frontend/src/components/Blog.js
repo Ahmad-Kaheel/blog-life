@@ -1,43 +1,26 @@
 import React, {useState, useEffect} from "react";
-import axios from 'axios';
-import {Link, renderMatches} from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
+import {getFirsthData, getAllData} from '../myTools/FetchData'
+import {capitalizeFirstLetter} from '../myTools/Mixed'
 
 const Blog = () => {
 
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
+    
+    // Get the first blog of the table of blogs (last blog) to show it on the top of the Home page 
+    useEffect(() => { 
+        const env = process.env.REACT_APP_API_URL ;
+        const rest_of_link = '/api/blog/featured' ; // Rest of link we will add after the link in .env
+        getFirsthData(env, rest_of_link, setFeaturedBlog);
+    },[] );
 
+    // Get all the blogs to show them in the Home page
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/featured`);
-                setFeaturedBlog(res.data[0]);
-            } catch (err) {
-                
-            }
-        }
-        fetchData();
-    }, [])
-
-    useEffect(() => {
-        const fetchBlogs = async () => {
-            try {
-                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/`);
-                setBlogs(res.data);
-            } catch (err) {
-                
-            }
-        }
-        fetchBlogs();
+        const env = process.env.REACT_APP_API_URL ;
+        const rest_of_link = `/api/blog/`;
+        getAllData(env, rest_of_link, setBlogs);
     }, []);
-
-    // Capitalize the first letter of the word
-    const capitalizeFirstLetter = (word) => {
-        if (word) 
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        return '';
-    };
     
     // Get all blogs 
     const getBlogs = () => {
@@ -78,19 +61,9 @@ const Blog = () => {
     
         <div className="container mt-3">
             <div className="nav-scroller py-1 mb-2">
-                <nav className="nav d-flex justify-content-between">
-                    <Link className="p-2 text-muted" to='/category/world'>World</Link> 
-                    <Link className="p-2 text-muted" to='/category/environment'>environment</Link>
-                    <Link className="p-2 text-muted" to='/category/technology'>Technology</Link>
-                    <Link className="p-2 text-muted" to='/category/design'>Design</Link>
-                    <Link className="p-2 text-muted" to='/category/culture'>Culture</Link>
-                    <Link className="p-2 text-muted" to='/category/business'>Business</Link>
-                    <Link className="p-2 text-muted" to='/category/politics'>Politics</Link>
-                    <Link className="p-2 text-muted" to='/category/opinion'>Opinion</Link>
-                    <Link className="p-2 text-muted" to='/category/science'>Science</Link>
-                    <Link className="p-2 text-muted" to='/category/health'>Health</Link>
-                    <Link className="p-2 text-muted" to='/category/style'>Style</Link>
-                    <Link className="p-2 text-muted" to='/category/travel'>Travel</Link>
+                <nav className="nav nav-tabs justify-content-center ">
+                    <Link className="nav-link active " to='/category/technology'>Technology</Link> 
+                    <Link className="nav-link active " to='/category/business'>Business</Link>
                 </nav>
             </div>
             <div className="p-4 p-md-5 mb-4 text-white rounded bg-dark">

@@ -1,23 +1,20 @@
-from datetime import datetime
+from datetime import date, datetime
 from msilib.schema import Environment
 from django.db import models
 from django.utils.text import slugify
 # Create your models here.
 
 class categories(models.TextChoices):
-    WORLD = 'worl'
-    ENVIRONMENT = 'environment'
     TECHNOLOGY = 'technology'
-
+    BUSINESS = 'business'
     
 class BlogPost(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField()
-    category = models.CharField(max_length=50, choices=categories.choices, default=categories.WORLD)
+    category = models.CharField(max_length=50, choices=categories.choices, default=categories.TECHNOLOGY)
     thumbnail = models.ImageField(upload_to='photos/%Y/%m/%d/')
     excerpt = models.CharField(max_length=150)
-    month = models.CharField(max_length=3)
-    day = models.CharField(max_length=3)
+    date = models.DateField(default= date.today )
     content = models.TextField()
     featured = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=datetime.now, blank= True, null= True)
